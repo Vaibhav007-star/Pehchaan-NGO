@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom certificate styling */
+.certificate-border {
+  border: 12px double #1E3A8A;
+  box-shadow: 0 0 0 4px #D97706, 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.font-serif-classic {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Print specific styles for ID cards, receipts, and certificates */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-area, .print-area * {
+    visibility: visible;
+  }
+  .print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
