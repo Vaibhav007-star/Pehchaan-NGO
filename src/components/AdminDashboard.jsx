@@ -15,7 +15,8 @@ import {
   FileText,
   TrendingUp,
   Building,
-  LogOut
+  LogOut,
+  KeyRound
 } from 'lucide-react';
 import CertificateGenerator from './CertificateGenerator';
 import IdCardGenerator from './IdCardGenerator';
@@ -71,6 +72,15 @@ export default function AdminDashboard({ onOpenRegister, onLogout, initialTab = 
     refreshData();
   };
 
+  const handleChangePin = () => {
+    const currentCustom = localStorage.getItem('pehchaan_admin_pin') || 'Not set (Default: admin123)';
+    const newPin = prompt(`Current Custom PIN: ${currentCustom}\n\nEnter your new custom Administrator Passcode/PIN:`);
+    if (newPin && newPin.trim()) {
+      localStorage.setItem('pehchaan_admin_pin', newPin.trim());
+      alert(`Admin PIN updated successfully!\nNew Passcode: ${newPin.trim()}\n\nYou can use this PIN whenever you access the Admin Portal.`);
+    }
+  };
+
   // Filter members
   const filteredMembers = members.filter(m => {
     const matchesSearch = 
@@ -107,13 +117,21 @@ export default function AdminDashboard({ onOpenRegister, onLogout, initialTab = 
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <button
             onClick={onOpenRegister}
-            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs sm:text-sm transition shadow"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs sm:text-sm transition shadow"
           >
             <PlusCircle className="w-4 h-4" />
             <span>New Registration</span>
+          </button>
+          <button
+            onClick={handleChangePin}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-750 text-amber-300 font-bold text-xs sm:text-sm transition shadow border border-slate-700/60"
+            title="Set custom passkey / PIN"
+          >
+            <KeyRound className="w-4 h-4 text-amber-400" />
+            <span>Set / Change PIN</span>
           </button>
           {onLogout && (
             <button

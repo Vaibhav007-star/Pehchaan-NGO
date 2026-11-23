@@ -8,8 +8,18 @@ export default function AdminLoginGate({ onAuthenticated, onCancel }) {
   const [error, setError] = useState('');
   const [showHint, setShowHint] = useState(true);
 
-  // Accepted passwords: 'admin', 'admin123', 'pehchaan1860', 'pehchaan2024'
-  const VALID_PASSCODES = ['admin', 'admin123', 'pehchaan1860', 'pehchaan2024', '1234'];
+  // Accepted passwords: supports environment variable, custom PIN from localStorage, or predefined default PINs
+  const envPasscode = import.meta.env.VITE_ADMIN_PASSCODE;
+  const customPin = typeof window !== 'undefined' ? localStorage.getItem('pehchaan_admin_pin') : null;
+  const VALID_PASSCODES = [
+    envPasscode,
+    customPin,
+    'admin',
+    'admin123',
+    'pehchaan1860',
+    'pehchaan2024',
+    '1234'
+  ].filter(Boolean).map(p => String(p).trim().toLowerCase());
 
   const handleSubmit = (e) => {
     e.preventDefault();
