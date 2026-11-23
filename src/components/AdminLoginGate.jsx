@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Lock, KeyRound, AlertCircle, ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Lock, KeyRound, AlertCircle, ArrowLeft } from 'lucide-react';
 import { NGO_INFO } from '../data/ngoData';
 import { LOGO_PNG_BASE64 } from '../data/assetsBase64';
 
 export default function AdminLoginGate({ onAuthenticated, onCancel }) {
   const [passcode, setPasscode] = useState('');
   const [error, setError] = useState('');
-  const [showHint, setShowHint] = useState(true);
 
   // Accepted passwords: supports environment variable, custom PIN from localStorage, or predefined default PINs
   const envPasscode = import.meta.env.VITE_ADMIN_PASSCODE;
@@ -30,11 +29,6 @@ export default function AdminLoginGate({ onAuthenticated, onCancel }) {
     } else {
       setError('Incorrect Administrator PIN. Access denied.');
     }
-  };
-
-  const handleQuickDemoAccess = () => {
-    sessionStorage.setItem('pehchaan_admin_auth', 'true');
-    onAuthenticated();
   };
 
   return (
@@ -85,7 +79,7 @@ export default function AdminLoginGate({ onAuthenticated, onCancel }) {
                 type="password"
                 required
                 autoFocus
-                placeholder="Enter PIN (e.g. admin123)"
+                placeholder="Enter Administrator PIN / Passcode"
                 value={passcode}
                 onChange={(e) => {
                   setPasscode(e.target.value);
@@ -96,22 +90,13 @@ export default function AdminLoginGate({ onAuthenticated, onCancel }) {
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div>
             <button
               type="submit"
               className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-700 hover:to-rose-800 text-white font-extrabold text-sm shadow-lg shadow-red-600/25 transition active:scale-98 flex items-center justify-center gap-2"
             >
               <ShieldCheck className="w-4 h-4" />
               <span>Verify &amp; Unlock Admin Console</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={handleQuickDemoAccess}
-              className="w-full py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition flex items-center justify-center gap-1.5"
-            >
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              <span>Click for 1-Click Authorized Demo Access (PIN: admin123)</span>
             </button>
           </div>
 
