@@ -24,7 +24,7 @@ def build_final_service_learning_report():
         hrun = hp.add_run("SERVICE LEARNING PROJECT REPORT | SCHOOL OF SCIENCES — 5BDA/EDA")
         hrun.font.name = "Calibri"
         hrun.font.size = Pt(8.5)
-        hrun.font.color.rgb = RGBColor(148, 163, 184)
+        hrun.font.color.rgb = RGBColor(30, 58, 138)
 
         # Footer
         footer = section.footer
@@ -33,14 +33,14 @@ def build_final_service_learning_report():
         frun = fp.add_run("Service Learning Project Report | Pehchaan NGO Digital Transformation")
         frun.font.name = "Calibri"
         frun.font.size = Pt(8.5)
-        frun.font.color.rgb = RGBColor(148, 163, 184)
+        frun.font.color.rgb = RGBColor(30, 58, 138)
 
     # Palette
     NAVY = RGBColor(30, 58, 138)       # #1E3A8A
     AMBER = RGBColor(217, 119, 6)      # #D97706
     DARK = RGBColor(15, 23, 42)        # #0F172A
-    BODY_COLOR = RGBColor(51, 65, 85)  # #334155
-    MUTED = RGBColor(100, 116, 139)    # #64748B
+    BODY_COLOR = RGBColor(15, 23, 42)  # #334155
+    MUTED = RGBColor(30, 58, 138)    # #64748B
     WHITE = RGBColor(255, 255, 255)
 
     def set_cell_background(cell, fill_hex):
@@ -402,27 +402,53 @@ def build_final_service_learning_report():
     # ==================== 3. OFFER LETTER AND COMPLETION CERTIFICATE ====================
     add_h1("3. Offer Letter and Completion Certificate from the Community")
     add_body(
-        "Below are the formal transcriptions of the official project engagement letters authorized by Pehchaan NGO leadership. "
-        "The physical signed copies are on institutional record with the Department of Computer Science & Engineering."
+        "Below are the formal documentary evidence and transcripts of the official project engagement letters authorized by Pehchaan NGO leadership. "
+        "The official email confirmation and handover documentation are on institutional record with the Department of Computer Science & Engineering, School of Sciences."
     )
+
+    # Official Email Confirmation Screenshot
+    email_img_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "official_ngo_confirmation_email.png")
+    if os.path.exists(email_img_path):
+        p_img = doc.add_paragraph()
+        p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_img.paragraph_format.space_before = Pt(8)
+        p_img.paragraph_format.space_after = Pt(4)
+        run_img = p_img.add_run()
+        run_img.add_picture(email_img_path, width=Inches(5.2))
+        
+        p_cap = doc.add_paragraph()
+        p_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_cap.paragraph_format.space_after = Pt(12)
+        r_cap = p_cap.add_run("Figure 3.1: Official Confirmation and Offer of Student Project Work Issued by Pehchaan NGO Leadership to University Mentor")
+        r_cap.font.name = 'Calibri'
+        r_cap.font.size = Pt(9.5)
+        r_cap.font.bold = True
+        r_cap.font.color.rgb = MUTED
 
     # Offer Letter Box
     add_callout(
-        "PEHCHAAN NGO (REGD.) — OFFICIAL PROJECT OFFER & COMMENCEMENT LETTER\n"
-        "Reference No: PEH/ENG/2026/SL-042                                                     Date: 01st September 2026\n"
-        "To: Student Project Team (Kunal 24215215, Samarth Chaudhary 24215221, Vaibhav 24215227, Divyansh 24215229)\n"
-        "Department of Computer Science & Engineering, School of Sciences (5BDA/EDA)\n\n"
-        "Subject: Formal Offer for Pro-Bono Digital Platform Development & Service Learning Project\n\n"
-        "Dear Student Team,\n"
-        "We are pleased to accept your service learning proposal to modernize the digital operations of Pehchaan NGO. "
-        "As discussed during our orientation, our organization urgently requires an automated platform to replace our static website, "
-        "facilitate volunteer/intern onboarding, generate Section 80G tax receipts, and automate verifiable credentials for our 1,500+ interns. "
-        "You are granted permission to access our public program records, center directories, and statutory guidelines. "
-        "We look forward to a fruitful collaboration that empowers our street school and malnutrition missions.\n\n"
+        "PEHCHAAN NGO — OFFICIAL PROJECT WORK CONFIRMATION & OFFER EMAIL\n"
+        "From: Pehchaan NGO <ngo.pehchaan@gmail.com>                                         Date: Fri, 2 Oct, 2026 at 11:49 pm\n"
+        "Cc: neha.saini@christuniversity.in, samarth.chaudhary@bscdsaih.christuniversity.in\n"
+        "To: Respected Mam/Sir (Faculty Mentor & Department Coordinators)\n\n"
+        "Subject: Confirmation of Student Project Work with Pehchaan NGO\n\n"
+        "Respected Mam/Sir,\n"
+        "I am writing to you on behalf of Pehchaan NGO to formally confirm that a group of your students is currently volunteering with our organization.\n\n"
+        "The following students are actively working under our guidance to design and develop a website for our NGO, completely free of cost. "
+        "We highly appreciate their initiative and the technical skills they are contributing to support our cause.\n\n"
+        "The students involved in this project are:\n"
+        "• Samarth Chaudhary (Roll No: 24215221)\n"
+        "• Vaibhav (Roll No: 24215227)\n"
+        "• Divyansh (Roll No: 24215229)\n"
+        "• Kunal (Roll No: 24215215)\n\n"
+        "We are very grateful for their dedication and hard work. Please feel free to reach out if you require any further information "
+        "or formal documentation regarding their association with Pehchaan NGO.\n\n"
         "Sincerely,\n"
-        "Dr. Neelesh Singh (Founder & General Secretary, Pehchaan NGO)\n"
-        "Head Office: BH 1/85 FF KA Block, Sector 12, Pratap Vihar, Ghaziabad, UP - 201009",
-        "3.1 OFFICIAL OFFER LETTER TRANSCRIPT"
+        "With regards,\n"
+        "Neelesh Singh (MD / Treasurer, Pehchaan NGO)\n"
+        "Mob: +91 9457320905 | Email: ngo.pehchaan@gmail.com\n"
+        "Head Office: 274/06 Charan Singh Colony Sector 12 Pratap Vihar Ghaziabad (UP) Pin No: 201009",
+        "3.1 OFFICIAL OFFER & CONFIRMATION EMAIL TRANSCRIPT"
     )
 
     # Completion Certificate Box
@@ -669,14 +695,14 @@ def build_final_service_learning_report():
     )
 
     # Embed original requirement screenshot if file exists
-    img_path = r"C:\Users\Vaibhav\.gemini\antigravity\brain\b03c67bf-74a0-4b44-9841-b3ec1b233933\.user_uploaded\media_1792380306828_6aab7b55.png"
+    img_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "requirements_modules_brief.jpg")
     if os.path.exists(img_path):
         p_img = doc.add_paragraph()
         p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
         p_img.paragraph_format.space_before = Pt(8)
         p_img.paragraph_format.space_after = Pt(4)
         run_img = p_img.add_run()
-        run_img.add_picture(img_path, width=Inches(5.5))
+        run_img.add_picture(img_path, width=Inches(5.6))
         
         p_cap = doc.add_paragraph()
         p_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -765,3 +791,4 @@ def build_final_service_learning_report():
 
 if __name__ == '__main__':
     build_final_service_learning_report()
+

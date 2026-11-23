@@ -1,6 +1,7 @@
 import { jsPDF } from 'jspdf';
 import QRCode from 'qrcode';
 import { NGO_INFO } from '../data/ngoData';
+import { LOGO_PNG_BASE64, SIGNATURE_PNG_BASE64 } from '../data/assetsBase64';
 
 // Generate QR Code as Data URL
 export async function generateQrCode(text) {
@@ -44,7 +45,7 @@ export async function downloadCertificatePdf(member) {
     format: 'a4'
   });
 
-  const certId = member.certificateId || `CERT-${new Date().getFullYear()}-${member.role.charAt(0)}${Math.floor(1000 + Math.random() * 9000)}`;
+  const certId = member.certificateId || `PWS/2024-25/${Math.floor(1100 + Math.random() * 800)}`;
   const verifyUrl = `https://pehchaan-ngo.org/verify?id=${certId}`;
   const qrDataUrl = await generateQrCode(verifyUrl);
 
@@ -52,212 +53,332 @@ export async function downloadCertificatePdf(member) {
   const height = doc.internal.pageSize.getHeight();
 
   // Outer Gold Border
-  doc.setDrawColor(217, 119, 6); // Amber
-  doc.setLineWidth(3);
+  doc.setDrawColor(217, 119, 6); // Amber Gold
+  doc.setLineWidth(2.5);
   doc.rect(8, 8, width - 16, height - 16);
 
-  // Inner Navy Border
-  doc.setDrawColor(30, 58, 138); // Deep Navy
-  doc.setLineWidth(1.5);
-  doc.rect(12, 12, width - 24, height - 24);
+  // Inner Red Border
+  doc.setDrawColor(229, 37, 32); // Red
+  doc.setLineWidth(1);
+  doc.rect(11, 11, width - 22, height - 22);
 
-  // Header - NGO Name
+  // Top Left: Ref Number
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(30, 58, 138);
-  doc.setFontSize(26);
-  doc.text('PEHCHAAN NGO', width / 2, 28, { align: 'center' });
-
-  // Tagline & Reg Details
-  doc.setFont('helvetica', 'italic');
   doc.setFontSize(10);
-  doc.setTextColor(100, 116, 139);
-  doc.text('The Power of Re-Use & Education for All | Reg No: 1122/6164M (Societies Act XXI 1860)', width / 2, 34, { align: 'center' });
-  doc.text(`NITI Aayog Darpan ID: ${NGO_INFO.nitiAayogDarpanId} | Head Office: Ghaziabad, UP`, width / 2, 39, { align: 'center' });
+  doc.setTextColor(30, 58, 138);
+  doc.text(`Ref. ${certId}`, 18, 22);
 
-  // Certificate Title Ribbon
-  doc.setFillColor(30, 58, 138);
-  doc.roundedRect(width / 2 - 70, 46, 140, 14, 3, 3, 'F');
-  doc.setTextColor(255, 255, 255);
+  // Top Right: Reg & Mobile
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(14);
-  const certTitle = member.role === 'Intern' 
-    ? 'CERTIFICATE OF INTERNSHIP' 
-    : (member.role === 'Volunteer' ? 'CERTIFICATE OF APPRECIATION' : 'MEMBERSHIP CREDENTIAL');
-  doc.text(certTitle, width / 2, 55, { align: 'center' });
-
-  // Presentation Text
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(12);
+  doc.setFontSize(9.5);
   doc.setTextColor(51, 65, 85);
-  doc.text('This is proudly and formally conferred upon', width / 2, 72, { align: 'center' });
+  doc.text('Reg. 1122/6164M', width - 18, 20, { align: 'right' });
+  doc.setFont('helvetica', 'normal');
+  doc.text('Mob +91 9457320905', width - 18, 25, { align: 'right' });
 
-  // Candidate Name
-  doc.setFont('times', 'bold');
-  doc.setFontSize(28);
-  doc.setTextColor(217, 119, 6);
-  doc.text(member.fullName.toUpperCase(), width / 2, 85, { align: 'center' });
+  // Top Center: Official Logo
+  try {
+    doc.addImage(LOGO_PNG_BASE64, 'PNG', width / 2 - 35, 14, 70, 20);
+  } catch (e) {
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(20);
+    doc.setTextColor(229, 37, 32);
+    doc.text('Pehchaan Welfare Society (Pehchaan NGO)', width / 2, 24, { align: 'center' });
+  }
+
+  // Address line below logo
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8.5);
+  doc.setTextColor(71, 85, 105);
+  doc.text('H.O.- Pehchaan NGO, BH 1/85 KA Block Sector-12, Pratap Vihar, Ghaziabad, UP-201009', width / 2, 38, { align: 'center' });
+
+  // Certificate Title
+  doc.setFont('times', 'italic');
+  doc.setFontSize(32);
+  doc.setTextColor(185, 28, 28); // Deep Crimson Red
+  doc.text('Certificate of Achievement', width / 2, 58, { align: 'center' });
+
+  // Presentation text
+  doc.setFont('times', 'italic');
+  doc.setFontSize(15);
+  doc.setTextColor(51, 65, 85);
+  doc.text('This Certificate of Appreciation is presented to', width / 2, 75, { align: 'center' });
+
+  // Recipient Name in BOLD RED/BLUE
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(26);
+  doc.setTextColor(185, 28, 28);
+  doc.text(member.fullName.toUpperCase(), width / 2, 92, { align: 'center' });
 
   // Underline
   doc.setDrawColor(217, 119, 6);
   doc.setLineWidth(0.8);
-  doc.line(width / 2 - 60, 88, width / 2 + 60, 88);
+  doc.line(width / 2 - 60, 95, width / 2 + 60, 95);
 
-  // Body Paragraph
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(11);
+  // Body
+  doc.setFont('times', 'italic');
+  doc.setFontSize(13.5);
   doc.setTextColor(51, 65, 85);
-  const collegeMention = member.college ? `representing ${member.college}, ` : '';
-  const bodyText = `in sincere recognition of exemplary dedication, selfless commitment, and valuable service rendered as an active ${member.role.toUpperCase()} with Pehchaan NGO. During this tenure at our ${member.center || 'Ghaziabad Street Education Center'}, they actively contributed toward grassroots teaching in Gyan Jyoti Street School, child nutrition monitoring in Project Ankur, and community drives under 'The Power of Re-Use'.`;
-  
+  const bodyText = `for their valuable contribution as a ${member.role.toLowerCase()} in Pehchaan Welfare Society (Pehchaan NGO) dedicated towards the Upliftment of the Underprivileged Community.`;
   const splitBody = doc.splitTextToSize(bodyText, width - 60);
-  doc.text(splitBody, width / 2, 98, { align: 'center', lineHeightFactor: 1.4 });
+  doc.text(splitBody, width / 2, 108, { align: 'center', lineHeightFactor: 1.4 });
 
-  // Authorized Note
-  doc.setFont('helvetica', 'italic');
-  doc.setFontSize(9);
-  doc.setTextColor(100, 116, 139);
-  doc.text('Authorized by MSW (Master in Social Work) Faculty & verified under Government / NGO community development guidelines.', width / 2, 134, { align: 'center' });
+  // Bottom Left: Mr Neelesh Singh
+  doc.setFont('times', 'bold');
+  doc.setFontSize(12);
+  doc.setTextColor(15, 23, 42);
+  doc.text('Mr Neelesh Singh', 48, 160, { align: 'center' });
+  doc.setFont('times', 'italic');
+  doc.setFontSize(10.5);
+  doc.setTextColor(71, 85, 105);
+  doc.text('Treasurer & MSW', 48, 166, { align: 'center' });
+  doc.text('(Pehchaan Welfare Society)', 48, 171, { align: 'center' });
 
-  // QR Code on bottom left
+  // Bottom Center: Gold Seal / QR
   if (qrDataUrl) {
-    doc.addImage(qrDataUrl, 'PNG', 20, 142, 32, 32);
+    doc.addImage(qrDataUrl, 'PNG', width / 2 - 12, 150, 24, 24);
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(7.5);
-    doc.setTextColor(71, 85, 105);
-    doc.text('Scan to Verify Genuine', 20, 178);
-    doc.text(`ID: ${certId}`, 20, 182);
+    doc.setFontSize(6.5);
+    doc.setTextColor(100, 116, 139);
+    doc.text(`Verify: ${certId}`, width / 2, 178, { align: 'center' });
   }
 
-  // Official Gold Seal graphic in middle
-  doc.setDrawColor(217, 119, 6);
-  doc.setLineWidth(1);
-  doc.circle(width / 2, 158, 14);
-  doc.circle(width / 2, 158, 12);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(7);
-  doc.setTextColor(217, 119, 6);
-  doc.text('PEHCHAAN NGO', width / 2, 156, { align: 'center' });
-  doc.text('OFFICIAL SEAL', width / 2, 160, { align: 'center' });
-  doc.text('ESTD 2016', width / 2, 164, { align: 'center' });
-
-  // Signatures on right
+  // Bottom Right: Mr Ved Prakash Singh
+  doc.setFont('times', 'bold');
+  doc.setFontSize(12);
+  doc.setTextColor(15, 23, 42);
+  doc.text('Mr Ved Prakash Singh', width - 48, 160, { align: 'center' });
   doc.setFont('times', 'italic');
-  doc.setFontSize(15);
-  doc.setTextColor(30, 58, 138);
-  doc.text('Dr. Neelesh Singh', width - 50, 160, { align: 'center' });
+  doc.setFontSize(10.5);
+  doc.setTextColor(71, 85, 105);
+  doc.text('Director', width - 48, 166, { align: 'center' });
+  doc.text('(Pehchaan Welfare Society)', width - 48, 171, { align: 'center' });
 
-  doc.setDrawColor(71, 85, 105);
-  doc.setLineWidth(0.5);
-  doc.line(width - 75, 164, width - 25, 164);
-
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(9);
-  doc.setTextColor(30, 58, 138);
-  doc.text('Dr. Neelesh Singh', width - 50, 169, { align: 'center' });
+  // Bottom watermark/reference
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8);
-  doc.setTextColor(100, 116, 139);
-  doc.text('Founder & General Secretary', width - 50, 173, { align: 'center' });
-  doc.text(`Issue Date: ${member.certificateDate || new Date().toISOString().split('T')[0]}`, width - 50, 178, { align: 'center' });
+  doc.setFontSize(7.5);
+  doc.setTextColor(148, 163, 184);
+  doc.text(certId, 18, height - 12);
+  doc.text('version 2.0', width - 18, height - 12, { align: 'right' });
 
   // Save the PDF
-  doc.save(`Pehchaan_Certificate_${certId}_${member.fullName.replace(/\s+/g, '_')}.pdf`);
+  doc.save(`Pehchaan_Certificate_${member.fullName.replace(/\s+/g, '_')}.pdf`);
 }
 
-// 2. OFFICIAL ID CARD BADGE PDF DOWNLOAD
+// 2. OFFICIAL ID CARD BADGE PDF DOWNLOAD (AUTHENTIC 2-SIDED PEHCHAAN WELFARE SOCIETY)
 export async function downloadIdCardPdf(member) {
-  // CR80 format: 85.6mm x 53.98mm
+  // CR80 format: 54mm x 86mm
   const doc = new jsPDF({
     orientation: 'portrait',
     unit: 'mm',
     format: [54, 86]
   });
 
-  const verifyUrl = `https://pehchaan-ngo.org/verify?id=${member.id}`;
-  const qrDataUrl = await generateQrCode(verifyUrl);
+  // ==================== PAGE 1: FRONT SIDE ====================
+  // 1. Subtle light grid background
+  doc.setDrawColor(241, 245, 249);
+  doc.setLineWidth(0.15);
+  for (let x = 0; x <= 54; x += 3) {
+    doc.line(x, 0, x, 86);
+  }
+  for (let y = 0; y <= 86; y += 3) {
+    doc.line(0, y, 54, y);
+  }
 
-  // Background Header
-  doc.setFillColor(30, 58, 138); // Navy
-  doc.rect(0, 0, 54, 20, 'F');
+  // 2. Top-Right Yellow Geometric Band
+  doc.setFillColor(255, 184, 0);
+  doc.lines([
+    [24, 0],
+    [0, 26],
+    [-24, -10]
+  ], 30, 0, [1, 1], 'F', true);
 
-  // Orange stripe
-  doc.setFillColor(217, 119, 6);
-  doc.rect(0, 20, 54, 2, 'F');
+  // 3. Right Edge Solid Red Banner
+  doc.setFillColor(229, 37, 32);
+  doc.rect(41, 0, 13, 86, 'F');
 
-  // NGO Name on ID Card
-  doc.setTextColor(255, 255, 255);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(9);
-  doc.text('PEHCHAAN NGO', 27, 7, { align: 'center' });
-
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(5);
-  doc.text('The Power of Re-Use & Education', 27, 11, { align: 'center' });
-  doc.text('Reg No: 1122/6164M | NITI: UP/2017/0153557', 27, 15, { align: 'center' });
-
-  // Photo Placeholder / Box
-  doc.setDrawColor(217, 119, 6);
-  doc.setLineWidth(0.8);
-  doc.setFillColor(241, 245, 249);
-  doc.roundedRect(17, 24, 20, 24, 1, 1, 'FD');
-
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(10);
-  doc.setTextColor(148, 163, 184);
-  doc.text('PHOTO', 27, 37, { align: 'center' });
-
-  // Name
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(9);
-  doc.setTextColor(30, 58, 138);
-  doc.text(member.fullName.toUpperCase(), 27, 52, { align: 'center' });
-
-  // Role Pill
-  doc.setFillColor(217, 119, 6);
-  doc.roundedRect(12, 54, 30, 4.5, 2, 2, 'F');
+  // Vertical text in Red Banner: "PEHCHAAN NGO"
   doc.setTextColor(255, 255, 255);
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(6.5);
-  doc.text(member.role.toUpperCase(), 27, 57.2, { align: 'center' });
+  const verticalLetters = ['P','E','H','C','H','A','A','N',' ','N','G','O'];
+  verticalLetters.forEach((char, idx) => {
+    if (char !== ' ') {
+      doc.text(char, 47.5, 18 + idx * 4.6, { align: 'center' });
+    }
+  });
 
-  // Member Details Grid
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(5.5);
-  doc.setTextColor(71, 85, 105);
+  // 4. Top-Left & Bottom-Left Pixel Blocks
+  doc.setFillColor(255, 184, 0);
+  doc.rect(2, 2, 3, 3, 'F');
+  doc.setFillColor(229, 37, 32);
+  doc.rect(4.5, 4.5, 3, 3, 'F');
 
-  doc.text('ID NO:', 5, 62);
-  doc.setFont('helvetica', 'normal');
-  doc.text(member.id, 16, 62);
+  doc.setFillColor(255, 184, 0);
+  doc.rect(2, 80, 2.5, 2.5, 'F');
+  doc.setFillColor(229, 37, 32);
+  doc.rect(4.2, 81.5, 2.5, 2.5, 'F');
 
-  doc.setFont('helvetica', 'bold');
-  doc.text('CENTER:', 5, 65.5);
-  doc.setFont('helvetica', 'normal');
-  doc.text((member.center || 'Ghaziabad Head Office').substring(0, 24), 16, 65.5);
-
-  doc.setFont('helvetica', 'bold');
-  doc.text('JOINED:', 5, 69);
-  doc.setFont('helvetica', 'normal');
-  doc.text(member.joinedDate || '2024-01-01', 16, 69);
-
-  doc.setFont('helvetica', 'bold');
-  doc.text('BLOOD:', 5, 72.5);
-  doc.setFont('helvetica', 'normal');
-  doc.text(member.bloodGroup || 'O+', 16, 72.5);
-
-  // QR Code on bottom right
-  if (qrDataUrl) {
-    doc.addImage(qrDataUrl, 'PNG', 38, 68, 12, 12);
+  // 5. Official Logo at Top Left/Center
+  try {
+    doc.addImage(LOGO_PNG_BASE64, 'PNG', 3, 3, 34, 10);
+  } catch (e) {
+    doc.setTextColor(229, 37, 32);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    doc.text('PEHCHAAN NGO', 20, 8, { align: 'center' });
   }
 
-  // Footer banner
-  doc.setFillColor(15, 23, 42);
-  doc.rect(0, 81, 54, 5, 'F');
-  doc.setTextColor(255, 255, 255);
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(4);
-  doc.text('Helpline: +91 9457320905 | Verify at pehchaanngo.org', 27, 84.5, { align: 'center' });
+  // 6. Circular Photo Frame with Red Border
+  const photoCenterX = 20;
+  const photoCenterY = 24.5;
+  const photoRadius = 9;
 
-  doc.save(`Pehchaan_ID_Badge_${member.id}.pdf`);
+  // Background circle
+  doc.setFillColor(248, 250, 252);
+  doc.circle(photoCenterX, photoCenterY, photoRadius, 'F');
+
+  // Draw Photo or Initials Placeholder
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(9);
+  doc.setTextColor(229, 37, 32);
+  const initials = member.fullName.split(' ').map(n => n[0]).join('').slice(0, 2);
+  doc.text(initials, photoCenterX, photoCenterY + 3, { align: 'center' });
+
+  // Outer red ring border
+  doc.setDrawColor(229, 37, 32);
+  doc.setLineWidth(1.1);
+  doc.circle(photoCenterX, photoCenterY, photoRadius, 'S');
+
+  // 7. Member Name in BOLD RED UPPERCASE
+  doc.setTextColor(229, 37, 32);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8);
+  doc.text(member.fullName.toUpperCase(), photoCenterX, 38, { align: 'center' });
+
+  // 8. Designation in Red
+  doc.setFontSize(6.2);
+  doc.text(member.role, photoCenterX, 41.5, { align: 'center' });
+
+  // 9. Details Table (Clean Aligned Key-Value with Colons)
+  const detailStartY = 47;
+  const rowHeight = 4.8;
+  const details = [
+    ['ID No', member.id],
+    ['Email', member.email || 'N/A'],
+    ['Phone', member.phone],
+    ['Location', member.location || 'ALL India'],
+    ['Valid', member.validTill || '31 March 2028']
+  ];
+
+  details.forEach(([key, val], idx) => {
+    const y = detailStartY + idx * rowHeight;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(5.5);
+    doc.setTextColor(0, 0, 0);
+    doc.text(key, 4, y);
+    doc.text(':', 14, y);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(30, 41, 59);
+    const displayVal = val.length > 22 ? val.substring(0, 21) + '..' : val;
+    doc.text(displayVal, 16, y);
+  });
+
+  // ==================== PAGE 2: BACK SIDE (TERMS) ====================
+  doc.addPage([54, 86], 'portrait');
+
+  // 1. Subtle light grid background
+  doc.setDrawColor(241, 245, 249);
+  doc.setLineWidth(0.15);
+  for (let x = 0; x <= 54; x += 3) {
+    doc.line(x, 0, x, 86);
+  }
+  for (let y = 0; y <= 86; y += 3) {
+    doc.line(0, y, 54, y);
+  }
+
+  // 2. Left Edge Solid Red Stripe
+  doc.setFillColor(229, 37, 32);
+  doc.rect(0, 0, 7, 86, 'F');
+
+  // 3. Top Yellow Geometric Band
+  doc.setFillColor(255, 184, 0);
+  doc.lines([
+    [24, 0],
+    [-18, 22],
+    [-6, -22]
+  ], 6, 0, [1, 1], 'F', true);
+
+  // 4. Top-Right & Bottom-Right Pixel Blocks
+  doc.setFillColor(229, 37, 32);
+  doc.rect(48, 2, 3, 3, 'F');
+  doc.setFillColor(255, 184, 0);
+  doc.rect(45.5, 4.5, 3, 3, 'F');
+
+  doc.setFillColor(255, 184, 0);
+  doc.rect(46, 78, 2.5, 2.5, 'F');
+  doc.setFillColor(229, 37, 32);
+  doc.rect(48, 80, 2.5, 2.5, 'F');
+
+  // 5. Title: TERMS & CONDITIONS
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(7);
+  doc.setTextColor(0, 0, 0);
+  doc.text('TERMS & CONDITIONS', 11, 16);
+
+  // 6. Clauses
+  doc.setFontSize(4.6);
+  doc.setFont('helvetica', 'normal');
+
+  const terms = [
+    { bold: 'Identification: ', text: 'The card holder must keep this ID card visible or present it when required for identification..' },
+    { bold: 'Proper Use: ', text: 'This ID card is issued only for official work and must not be shared, copied, or misused.' },
+    { bold: 'Security: ', text: 'If this card is lost or stolen, it must be reported to the organization immediately.' },
+    { bold: 'Note: ', text: 'The organization reserves the right to cancel this ID card at any time.' }
+  ];
+
+  let currentY = 21;
+  terms.forEach(t => {
+    doc.setFont('helvetica', 'bold');
+    doc.text(t.bold, 11, currentY);
+    const boldWidth = doc.getTextWidth(t.bold);
+    
+    doc.setFont('helvetica', 'normal');
+    const remainingText = doc.splitTextToSize(t.text, 38 - boldWidth);
+    doc.text(remainingText[0] || '', 11 + boldWidth, currentY);
+
+    if (remainingText.length > 1) {
+      for (let r = 1; r < remainingText.length; r++) {
+        currentY += 2.8;
+        doc.text(remainingText[r], 11, currentY);
+      }
+    }
+    currentY += 4.2;
+  });
+
+  // 7. ID Number & Valid
+  currentY += 1;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(5.2);
+  doc.text(`ID Number: : ${member.id}`, 11, currentY);
+  currentY += 3.4;
+  doc.text(`ID Valid: : ${member.validTill || '31 March 2028'}`, 11, currentY);
+
+  // 8. Signature & Authorized By
+  try {
+    doc.addImage(SIGNATURE_PNG_BASE64, 'PNG', 10, currentY + 3, 16, 8.5);
+  } catch (e) {
+    // fallback
+  }
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(5);
+  doc.text('Authorized By:', 11, currentY + 14);
+  doc.setFontSize(5.6);
+  doc.text('Pehchaan NGO', 11, currentY + 17);
+
+  doc.save(`Pehchaan_Official_ID_${member.id}.pdf`);
 }
 
 // 3. OFFICIAL 80G TAX EXEMPTION DONATION RECEIPT

@@ -1,3 +1,4 @@
+import { LOGO_PNG_BASE64 } from '../data/assetsBase64';
 import React, { useState } from 'react';
 import { 
   Heart, 
@@ -45,7 +46,7 @@ export default function Navbar({
             </span>
             <span className="hidden lg:inline text-slate-500">|</span>
             <span className="hidden lg:inline text-emerald-400 font-medium">
-              80G Tax Exemption Available
+              The Power Of Re-Use &amp; Education for All
             </span>
           </div>
 
@@ -67,24 +68,11 @@ export default function Navbar({
             onClick={() => setActiveTab('home')}
             className="flex items-center gap-3 text-left group"
           >
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-700 via-blue-800 to-indigo-900 flex items-center justify-center text-white shadow-md shadow-blue-900/20 group-hover:scale-105 transition transform">
-              <div className="relative">
-                <span className="text-2xl font-black font-cinzel text-amber-400">प</span>
-              </div>
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-xl sm:text-2xl font-black tracking-tight text-blue-950 font-heading">
-                  PEHCHAAN
-                </span>
-                <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 bg-amber-100 text-amber-800 rounded-md">
-                  NGO
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-700 font-medium tracking-wide">
-                The Power of Re-Use & Education for All
-              </p>
-            </div>
+            <img 
+              src={LOGO_PNG_BASE64} 
+              alt="Pehchaan Welfare Society NGO" 
+              className="h-11 sm:h-12 w-auto object-contain group-hover:scale-105 transition transform"
+            />
           </button>
 
           {/* Desktop Nav Links */}
@@ -98,8 +86,8 @@ export default function Navbar({
                   onClick={() => setActiveTab(link.id)}
                   className={`px-3 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-1.5 ${
                     isActive 
-                      ? 'bg-blue-50 text-blue-800 font-bold' 
-                      : 'text-slate-600 hover:text-blue-700 hover:bg-slate-50'
+                      ? 'bg-red-50 text-red-700 font-bold' 
+                      : 'text-slate-700 hover:text-red-700 hover:bg-slate-50'
                   }`}
                 >
                   {Icon && <Icon className="w-3.5 h-3.5 text-slate-500" />}
@@ -113,28 +101,30 @@ export default function Navbar({
           <div className="hidden sm:flex items-center gap-3">
             <button
               onClick={onOpenRegister}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-bold text-blue-900 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition shadow-sm"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-bold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 transition shadow-sm"
             >
-              <UserPlus className="w-4 h-4 text-blue-700" />
+              <UserPlus className="w-4 h-4 text-red-600" />
               <span>Join as Volunteer/Intern</span>
             </button>
 
+            {/* DONATE NOW BUTTON: 80G REMOVED & GREEN COLOR */}
             <button
               onClick={onOpenDonate}
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-600 hover:to-amber-800 transition shadow-md shadow-amber-500/20 active:scale-95"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-extrabold text-white bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 transition shadow-md shadow-emerald-600/25 active:scale-95"
             >
               <Heart className="w-4 h-4 text-white fill-white animate-pulse" />
-              <span>Donate (80G Tax)</span>
+              <span>Donate Now</span>
             </button>
           </div>
 
           {/* Mobile menu toggle */}
           <div className="flex lg:hidden items-center gap-2">
+            {/* Mobile Donate Button */}
             <button
               onClick={onOpenDonate}
-              className="px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-amber-600 shadow-sm"
+              className="px-3.5 py-1.5 rounded-lg text-xs font-extrabold text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm"
             >
-              Donate
+              Donate Now
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -160,7 +150,7 @@ export default function Navbar({
                 }}
                 className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition ${
                   activeTab === link.id
-                    ? 'bg-blue-50 text-blue-800 font-bold'
+                    ? 'bg-red-50 text-red-700 font-bold'
                     : 'text-slate-700 hover:bg-slate-50'
                 }`}
               >
@@ -175,7 +165,7 @@ export default function Navbar({
                 onOpenRegister();
                 setMobileMenuOpen(false);
               }}
-              className="w-full py-2.5 rounded-xl text-sm font-bold text-center text-blue-900 bg-blue-50 border border-blue-200"
+              className="w-full py-2.5 rounded-xl text-sm font-bold text-center text-red-700 bg-red-50 border border-red-200"
             >
               Join as Volunteer / Intern / Member
             </button>
@@ -185,4 +175,3 @@ export default function Navbar({
     </header>
   );
 }
-

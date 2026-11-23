@@ -131,7 +131,7 @@ export default function RegistrationModal({ isOpen, onClose, onRegisteredSuccess
                 <div className="flex justify-between items-start">
                   <div>
                     <span className="text-xs text-slate-600 font-semibold uppercase">Assigned System ID</span>
-                    <p className="text-lg font-mono font-bold text-blue-900 tracking-wider">
+                    <p className="text-lg font-mono font-bold text-red-700 tracking-wider">
                       {registeredMember.id}
                     </p>
                   </div>
@@ -223,7 +223,7 @@ export default function RegistrationModal({ isOpen, onClose, onRegisteredSuccess
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder="e.g. Priyanshu Sharma"
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm"
                   />
                 </div>
 
@@ -238,7 +238,7 @@ export default function RegistrationModal({ isOpen, onClose, onRegisteredSuccess
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="name@example.com"
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm"
                   />
                 </div>
 
@@ -253,7 +253,7 @@ export default function RegistrationModal({ isOpen, onClose, onRegisteredSuccess
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="+91 9876543210"
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm"
                   />
                 </div>
 
@@ -268,7 +268,7 @@ export default function RegistrationModal({ isOpen, onClose, onRegisteredSuccess
                     value={formData.college}
                     onChange={handleChange}
                     placeholder={role === 'Intern' ? 'e.g. Amity / DU / IPU' : 'e.g. Working Professional / Student'}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm"
                   />
                 </div>
 
@@ -280,7 +280,7 @@ export default function RegistrationModal({ isOpen, onClose, onRegisteredSuccess
                     name="center"
                     value={formData.center}
                     onChange={handleChange}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-white"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm bg-white"
                   >
                     <option value="Ghaziabad Sector 12 Center">Ghaziabad (Sector 12 Pratap Vihar HQ)</option>
                     <option value="Noida Sector 22 Center">Noida (Sector 22 Aditi / Pawan Center)</option>
@@ -298,7 +298,7 @@ export default function RegistrationModal({ isOpen, onClose, onRegisteredSuccess
                     name="bloodGroup"
                     value={formData.bloodGroup}
                     onChange={handleChange}
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-white"
+                    className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm bg-white"
                   >
                     {['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'].map(bg => (
                       <option key={bg} value={bg}>{bg}</option>
@@ -317,7 +317,7 @@ export default function RegistrationModal({ isOpen, onClose, onRegisteredSuccess
                   value={formData.skills}
                   onChange={handleChange}
                   placeholder="e.g. English, Primary Math, Health Camps, Photography, Web Design"
-                  className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
+                  className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm"
                 />
               </div>
 
@@ -331,7 +331,7 @@ export default function RegistrationModal({ isOpen, onClose, onRegisteredSuccess
                   value={formData.emergencyContact}
                   onChange={handleChange}
                   placeholder="+91 Guardian / Alternate phone"
-                  className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm"
+                  className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm"
                 />
               </div>
 
@@ -340,7 +340,7 @@ export default function RegistrationModal({ isOpen, onClose, onRegisteredSuccess
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-950 hover:from-blue-800 hover:to-indigo-900 text-white font-bold text-sm sm:text-base shadow-lg shadow-blue-900/20 active:scale-[0.99] transition flex items-center justify-center gap-2"
+                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-red-600 via-red-700 to-rose-800 hover:from-red-700 hover:to-rose-900 text-white font-bold text-sm sm:text-base shadow-lg shadow-blue-900/20 active:scale-[0.99] transition flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
                     <span>Registering with Central NGO System...</span>

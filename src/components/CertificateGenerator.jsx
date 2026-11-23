@@ -67,7 +67,7 @@ export default function CertificateGenerator({ initialMember = null }) {
         {/* Left Form: Customizer (4 Cols) */}
         <div className="lg:col-span-4 bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
           <h3 className="text-sm font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
-            <UserCheck className="w-4 h-4 text-blue-900" />
+            <UserCheck className="w-4 h-4 text-red-700" />
             <span>Customize Certificate</span>
           </h3>
 
@@ -80,7 +80,7 @@ export default function CertificateGenerator({ initialMember = null }) {
               name="fullName"
               value={member.fullName}
               onChange={handleChange}
-              className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+              className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-red-600"
             />
           </div>
 
@@ -92,7 +92,7 @@ export default function CertificateGenerator({ initialMember = null }) {
               name="role"
               value={member.role}
               onChange={handleChange}
-              className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+              className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-red-600 bg-white"
             >
               <option value="Intern">Intern (Social Internship / MSW)</option>
               <option value="Volunteer">Volunteer (Grassroots & Education)</option>
@@ -110,7 +110,7 @@ export default function CertificateGenerator({ initialMember = null }) {
               value={member.college || ''}
               onChange={handleChange}
               placeholder="e.g. University of Delhi"
-              className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+              className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-red-600"
             />
           </div>
 
@@ -122,7 +122,7 @@ export default function CertificateGenerator({ initialMember = null }) {
               name="center"
               value={member.center || 'Ghaziabad Sector 12 Center'}
               onChange={handleChange}
-              className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+              className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-red-600 bg-white"
             >
               <option value="Ghaziabad Sector 12 Center">Ghaziabad (Sector 12 Pratap Vihar HQ)</option>
               <option value="Noida Sector 22 Center">Noida (Sector 22 Aditi / Pawan Center)</option>
@@ -141,7 +141,7 @@ export default function CertificateGenerator({ initialMember = null }) {
                 name="certificateId"
                 value={member.certificateId}
                 onChange={handleChange}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono uppercase focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono uppercase focus:outline-none focus:ring-2 focus:ring-red-600"
               />
             </div>
             <div>
@@ -153,7 +153,7 @@ export default function CertificateGenerator({ initialMember = null }) {
                 name="certificateDate"
                 value={member.certificateDate}
                 onChange={handleChange}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-red-600"
               />
             </div>
           </div>
@@ -161,7 +161,7 @@ export default function CertificateGenerator({ initialMember = null }) {
           <div className="pt-2">
             <button
               onClick={handleDownload}
-              className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-950 hover:from-blue-800 hover:to-indigo-900 text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2"
+              className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-red-600 via-red-700 to-rose-800 hover:from-red-700 hover:to-rose-900 text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2"
             >
               <Download className="w-4 h-4 text-amber-400" />
               <span>Download High-Resolution PDF</span>
@@ -180,7 +180,7 @@ export default function CertificateGenerator({ initialMember = null }) {
             </span>
             <button
               onClick={handleDownload}
-              className="inline-flex items-center gap-1.5 text-xs text-blue-900 font-bold hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs text-red-700 font-bold hover:underline"
             >
               <Download className="w-3.5 h-3.5" />
               <span>Direct PDF Export</span>
@@ -188,7 +188,7 @@ export default function CertificateGenerator({ initialMember = null }) {
           </div>
 
           {/* Realistic Certificate Container */}
-          <div className="bg-amber-50/40 p-6 sm:p-10 rounded-3xl border-8 border-double border-blue-900 shadow-xl relative overflow-hidden text-center space-y-4">
+          <div className="bg-amber-50/40 p-6 sm:p-10 rounded-3xl border-8 border-double border-red-800 shadow-xl relative overflow-hidden text-center space-y-4">
             
             {/* Top Crest & NGO Title */}
             <div>
@@ -197,7 +197,7 @@ export default function CertificateGenerator({ initialMember = null }) {
                   Govt. Registered NGO | Act XXI of 1860
                 </span>
               </div>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-blue-950 font-heading tracking-tight">
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-red-950 font-heading tracking-tight">
                 PEHCHAAN NGO
               </h2>
               <p className="text-xs text-slate-600 font-serif italic mt-0.5">
@@ -206,7 +206,7 @@ export default function CertificateGenerator({ initialMember = null }) {
             </div>
 
             {/* Certificate Ribbon */}
-            <div className="inline-block px-6 py-2 bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-950 text-white text-xs sm:text-sm font-extrabold tracking-wider uppercase rounded-md shadow-sm">
+            <div className="inline-block px-6 py-2 bg-gradient-to-r from-red-600 via-red-700 to-rose-800 text-white text-xs sm:text-sm font-extrabold tracking-wider uppercase rounded-md shadow-sm">
               {member.role === 'Intern' ? 'CERTIFICATE OF INTERNSHIP' : (member.role === 'Volunteer' ? 'CERTIFICATE OF APPRECIATION' : 'MEMBERSHIP CREDENTIAL')}
             </div>
 
@@ -224,7 +224,7 @@ export default function CertificateGenerator({ initialMember = null }) {
             {/* Citation paragraph */}
             <p className="text-xs sm:text-sm text-slate-700 leading-relaxed max-w-xl mx-auto px-2">
               for their outstanding commitment, active participation, and meritorious contribution as an official{' '}
-              <strong className="text-blue-950">{member.role}</strong> at our{' '}
+              <strong className="text-red-950">{member.role}</strong> at our{' '}
               <strong>{member.center}</strong>. During their tenure, they demonstrated exemplary leadership in street education under Gyan Jyoti and child welfare programs.
             </p>
 
@@ -242,7 +242,7 @@ export default function CertificateGenerator({ initialMember = null }) {
                 )}
                 <div>
                   <span className="text-[10px] font-bold text-slate-700 block uppercase">Official QR Verify</span>
-                  <span className="text-[10px] font-mono font-bold text-blue-900 block">{member.certificateId}</span>
+                  <span className="text-[10px] font-mono font-bold text-red-700 block">{member.certificateId}</span>
                   <span className="text-[9px] text-emerald-800 font-medium">Valid & Authenticated</span>
                 </div>
               </div>
@@ -256,7 +256,7 @@ export default function CertificateGenerator({ initialMember = null }) {
 
               {/* Founder Sign */}
               <div className="text-right">
-                <p className="font-serif italic text-base text-blue-950 font-bold">
+                <p className="font-serif italic text-base text-red-950 font-bold">
                   Dr. Neelesh Singh
                 </p>
                 <div className="w-24 h-0.5 bg-slate-400 ml-auto my-0.5"></div>

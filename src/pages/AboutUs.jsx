@@ -29,8 +29,8 @@ export default function AboutUs({ onOpenRegister, onOpenDonate }) {
       
       {/* Page Header */}
       <div className="text-center max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-900 text-xs font-bold uppercase tracking-wider mb-3">
-          <ShieldCheck className="w-4 h-4 text-blue-700" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 text-red-900 text-xs font-bold uppercase tracking-wider mb-3">
+          <ShieldCheck className="w-4 h-4 text-red-700" />
           <span>Statutory Registered Non-Governmental Organization</span>
         </div>
         <h1 className="text-3xl sm:text-5xl font-black text-slate-900 font-heading">
@@ -68,7 +68,7 @@ export default function AboutUs({ onOpenRegister, onOpenDonate }) {
           </div>
           <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
             <span className="text-[11px] font-bold text-slate-400 uppercase block">NITI Aayog Darpan:</span>
-            <span className="font-mono font-bold text-blue-900 text-sm">{NGO_INFO.nitiAayogDarpanId}</span>
+            <span className="font-mono font-bold text-red-800 text-sm">{NGO_INFO.nitiAayogDarpanId}</span>
           </div>
           <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
             <span className="text-[11px] font-bold text-slate-400 uppercase block">Section 80G IT Exemption:</span>
@@ -103,7 +103,7 @@ export default function AboutUs({ onOpenRegister, onOpenDonate }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {missionPoints.map((pt, idx) => (
             <div key={idx} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-2">
-              <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-900 font-extrabold flex items-center justify-center text-xs">
+              <div className="w-8 h-8 rounded-xl bg-blue-50 text-red-800 font-extrabold flex items-center justify-center text-xs">
                 0{idx + 1}
               </div>
               <h3 className="font-bold text-slate-900 text-base">{pt.title}</h3>
@@ -168,9 +168,9 @@ export default function AboutUs({ onOpenRegister, onOpenDonate }) {
         <div className="pt-4 flex flex-wrap gap-4 justify-center sm:justify-start">
           <button
             onClick={onOpenDonate}
-            className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs shadow transition"
+            className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-md transition"
           >
-            Support Pehchaan NGO (80G Tax Exemption)
+            Donate Now
           </button>
           <button
             onClick={onOpenRegister}

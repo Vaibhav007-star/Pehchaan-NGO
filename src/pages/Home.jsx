@@ -27,7 +27,7 @@ export default function Home({
       title: "Complete Dynamic Coding Website",
       desc: "Modern React architecture replacing static templates with real-time state and offline support.",
       icon: Sparkles,
-      color: "bg-blue-500/10 text-blue-800 border-blue-200",
+      color: "bg-red-500/10 text-red-800 border-red-200",
       action: () => setActiveTab('about')
     },
     {
@@ -48,7 +48,7 @@ export default function Home({
       title: "Mail & Payment Gateway Integration",
       desc: "Integrated Razorpay checkout (UPI / Cards / NetBanking) and instant automated email dispatches.",
       icon: CreditCard,
-      color: "bg-indigo-500/10 text-indigo-800 border-indigo-200",
+      color: "bg-rose-500/10 text-rose-800 border-rose-200",
       action: onOpenDonate
     },
     {
@@ -62,21 +62,21 @@ export default function Home({
       title: "Verify Member, Volunteer & Intern",
       desc: "Public search engine for colleges, HRs, and employers to confirm active credential validity.",
       icon: ShieldCheck,
-      color: "bg-teal-500/10 text-teal-800 border-teal-200",
+      color: "bg-emerald-500/10 text-emerald-800 border-emerald-200",
       action: () => setActiveTab('verify')
     },
     {
       title: "Verify Member, Intern Volunteer ID Card",
       desc: "CR80 print-ready identity badges complete with photo, center, blood group, and barcode/QR.",
       icon: CreditCard,
-      color: "bg-purple-500/10 text-purple-800 border-purple-200",
+      color: "bg-amber-500/10 text-amber-800 border-amber-200",
       action: () => setActiveTab('idcards')
     },
     {
       title: "Auto Generate 80G Donation Receipt",
       desc: "Instant Income Tax compliant 80G tax exemption receipt PDF download with donor PAN & signature.",
       icon: FileText,
-      color: "bg-orange-500/10 text-orange-900 border-orange-200",
+      color: "bg-rose-500/10 text-rose-900 border-rose-200",
       action: onOpenDonate
     }
   ];
@@ -85,10 +85,10 @@ export default function Home({
     <div className="space-y-20 pb-16">
       
       {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-blue-950 via-blue-900 to-slate-900 text-white pt-16 pb-24 px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-red-950 to-slate-900 text-white pt-16 pb-24 px-4 sm:px-6 lg:px-8">
         
         {/* Glow backdrop shapes */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-600/20 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto relative z-10 text-center space-y-6">
@@ -116,10 +116,10 @@ export default function Home({
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
             <button
               onClick={onOpenDonate}
-              className="px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-600 hover:to-amber-800 text-slate-950 font-extrabold text-base shadow-lg shadow-amber-500/30 transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2"
+              className="px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-base shadow-lg shadow-emerald-600/30 transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2"
             >
-              <Heart className="w-5 h-5 fill-slate-950" />
-              <span>Donate Now (80G Tax Exemption)</span>
+              <Heart className="w-5 h-5 fill-white" />
+              <span>Donate Now</span>
             </button>
 
             <button
@@ -132,7 +132,7 @@ export default function Home({
 
             <button
               onClick={() => setActiveTab('verify')}
-              className="px-6 py-4 rounded-2xl bg-blue-900/60 hover:bg-blue-800/80 text-blue-200 font-bold text-sm border border-blue-700/50 transition flex items-center gap-2"
+              className="px-6 py-4 rounded-2xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 font-bold text-sm border border-slate-700 transition flex items-center gap-2"
             >
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
               <span>Verify Credentials</span>
@@ -304,7 +304,7 @@ export default function Home({
 
             <button
               onClick={onOpenDonate}
-              className="px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow transition flex items-center gap-1.5"
+              className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-md transition flex items-center gap-1.5"
             >
               <Heart className="w-4 h-4 fill-white" />
               <span>Sponsor a Child's Education (₹1,000)</span>
@@ -316,7 +316,7 @@ export default function Home({
 
       {/* 5. DR. APJ ABDUL KALAM INSPIRATION & VOLUNTEERING QUOTE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 rounded-3xl p-8 sm:p-12 text-white shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="bg-gradient-to-r from-slate-950 via-red-950 to-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
           
           <div className="max-w-2xl space-y-4">
             <span className="text-xs font-bold uppercase tracking-widest text-amber-400">
@@ -339,7 +339,7 @@ export default function Home({
                 <CheckCircle2 className="w-4 h-4" />
                 MSW Authorized Certificate
               </span>
-              <span className="flex items-center gap-1.5 text-blue-400">
+              <span className="flex items-center gap-1.5 text-amber-400">
                 <CheckCircle2 className="w-4 h-4" />
                 Print-ready ID Badges
               </span>

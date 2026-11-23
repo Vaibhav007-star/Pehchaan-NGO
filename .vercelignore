@@ -1,0 +1,13 @@
+# Heavy Python scripts & documents
+*.docx
+*.pptx
+*.py
+*.log
+*.html
+!index.html
+__pycache__
+scraped_pehchaan_data.json
+official_ngo_confirmation_email.png
+requirements_modules_brief.jpg
+extracted_pdf_img_0.png
+email_render.html

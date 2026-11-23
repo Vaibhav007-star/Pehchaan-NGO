@@ -1,7 +1,8 @@
 # Pehchaan NGO - Digital Transformation & Management Platform
 ### Pro-Bono Academic Service-Learning Project
 
-> **Live Local URL:** [http://localhost:5173/](http://localhost:5173/)  
+> **Live Production URL:** [https://pehchaan-ngo-platform.vercel.app](https://pehchaan-ngo-platform.vercel.app)  
+> **Live Local URL:** [http://localhost:3000/](http://localhost:3000/)  
 > **Community Partner:** Pehchaan NGO (Pehchaan The Street School)  
 > **Registration Act:** Societies Registration Act XXI of 1860 (Reg No: 1122/6164M, Renewed: R/GHA/17643/2020-2021)  
 > **NITI Aayog Darpan ID:** UP/2017/0153557  

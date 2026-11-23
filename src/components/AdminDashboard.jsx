@@ -14,8 +14,11 @@ import {
   PlusCircle,
   FileText,
   TrendingUp,
-  Building
+  Building,
+  LogOut
 } from 'lucide-react';
+import CertificateGenerator from './CertificateGenerator';
+import IdCardGenerator from './IdCardGenerator';
 import { 
   getMembers, 
   getDonations, 
@@ -30,8 +33,8 @@ import {
 } from '../utils/pdfGenerator';
 import { NGO_INFO } from '../data/ngoData';
 
-export default function AdminDashboard({ onOpenRegister }) {
-  const [activeTab, setActiveTab] = useState('members'); // 'members', 'donations', 'emails', 'metrics'
+export default function AdminDashboard({ onOpenRegister, onLogout, initialTab = 'members' }) {
+  const [activeTab, setActiveTab] = useState(initialTab); // 'members', 'idcards', 'certificates', 'donations', 'emails'
   const [members, setMembers] = useState([]);
   const [donations, setDonations] = useState([]);
   const [emails, setEmails] = useState([]);
@@ -41,6 +44,12 @@ export default function AdminDashboard({ onOpenRegister }) {
   useEffect(() => {
     refreshData();
   }, []);
+
+  useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+  }, [initialTab]);
 
   const refreshData = () => {
     setMembers(getMembers());
@@ -84,16 +93,16 @@ export default function AdminDashboard({ onOpenRegister }) {
     <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 space-y-8">
       
       {/* Header bar */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-950 p-6 sm:p-8 rounded-3xl text-white shadow-xl">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-gradient-to-r from-slate-950 via-red-950 to-slate-900 p-6 sm:p-8 rounded-3xl text-white shadow-xl">
         <div>
           <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider mb-1">
             <ShieldCheck className="w-4 h-4" />
-            <span>Pehchaan NGO Administrative Console</span>
+            <span>Pehchaan NGO Administrative Console · Authorized Personnel</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold font-heading">
             NGO Operations & Credential Management
           </h1>
-          <p className="text-blue-200 text-xs sm:text-sm mt-1">
+          <p className="text-slate-300 text-xs sm:text-sm mt-1">
             Directly manage registrations, generate certificates, issue ID badges, and track 80G tax donations.
           </p>
         </div>
@@ -101,11 +110,21 @@ export default function AdminDashboard({ onOpenRegister }) {
         <div className="flex items-center gap-3">
           <button
             onClick={onOpenRegister}
-            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs sm:text-sm transition shadow"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs sm:text-sm transition shadow"
           >
             <PlusCircle className="w-4 h-4" />
             <span>New Registration</span>
           </button>
+          {onLogout && (
+            <button
+              onClick={onLogout}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-red-800/80 hover:bg-red-700 text-white font-bold text-xs sm:text-sm transition shadow border border-red-600/40"
+              title="Sign out of Administrator Portal"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Sign Out</span>
+            </button>
+          )}
         </div>
       </div>
 
@@ -115,7 +134,7 @@ export default function AdminDashboard({ onOpenRegister }) {
         <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
           <div className="flex items-center justify-between text-slate-500 text-xs font-bold uppercase">
             <span>Total Enrolled</span>
-            <Users className="w-4 h-4 text-blue-800" />
+            <Users className="w-4 h-4 text-red-800" />
           </div>
           <p className="text-2xl font-black text-slate-900 mt-2 font-heading">
             {members.length}
@@ -154,9 +173,9 @@ export default function AdminDashboard({ onOpenRegister }) {
         <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
           <div className="flex items-center justify-between text-slate-500 text-xs font-bold uppercase">
             <span>Auto Emails Dispatched</span>
-            <Mail className="w-4 h-4 text-indigo-600" />
+            <Mail className="w-4 h-4 text-red-700" />
           </div>
-          <p className="text-2xl font-black text-indigo-900 mt-2 font-heading">
+          <p className="text-2xl font-black text-slate-900 mt-2 font-heading">
             {emails.length}
           </p>
           <p className="text-[11px] text-slate-500 mt-0.5">
@@ -167,24 +186,48 @@ export default function AdminDashboard({ onOpenRegister }) {
       </div>
 
       {/* Tabs Row */}
-      <div className="flex border-b border-slate-200 gap-4 text-sm font-bold">
+      <div className="flex border-b border-slate-200 gap-2 sm:gap-4 text-xs sm:text-sm font-bold overflow-x-auto pb-px">
         <button
           onClick={() => setActiveTab('members')}
-          className={`pb-3 px-1 border-b-2 transition flex items-center gap-2 ${
+          className={`pb-3 px-2 border-b-2 transition flex items-center gap-1.5 shrink-0 ${
             activeTab === 'members'
-              ? 'border-blue-900 text-blue-900'
+              ? 'border-red-600 text-red-700 font-extrabold'
               : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
           <Users className="w-4 h-4" />
-          <span>Members, Volunteers & Interns ({members.length})</span>
+          <span>Members & Volunteers ({members.length})</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('idcards')}
+          className={`pb-3 px-2 border-b-2 transition flex items-center gap-1.5 shrink-0 ${
+            activeTab === 'idcards'
+              ? 'border-red-600 text-red-700 font-extrabold'
+              : 'border-transparent text-slate-500 hover:text-slate-800'
+          }`}
+        >
+          <CreditCard className="w-4 h-4" />
+          <span>Generate Official ID Card</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('certificates')}
+          className={`pb-3 px-2 border-b-2 transition flex items-center gap-1.5 shrink-0 ${
+            activeTab === 'certificates'
+              ? 'border-red-600 text-red-700 font-extrabold'
+              : 'border-transparent text-slate-500 hover:text-slate-800'
+          }`}
+        >
+          <Award className="w-4 h-4" />
+          <span>Issue Certificate</span>
         </button>
 
         <button
           onClick={() => setActiveTab('donations')}
-          className={`pb-3 px-1 border-b-2 transition flex items-center gap-2 ${
+          className={`pb-3 px-2 border-b-2 transition flex items-center gap-1.5 shrink-0 ${
             activeTab === 'donations'
-              ? 'border-blue-900 text-blue-900'
+              ? 'border-red-600 text-red-700 font-extrabold'
               : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
@@ -194,13 +237,13 @@ export default function AdminDashboard({ onOpenRegister }) {
 
         <button
           onClick={() => setActiveTab('emails')}
-          className={`pb-3 px-1 border-b-2 transition flex items-center gap-2 ${
+          className={`pb-3 px-2 border-b-2 transition flex items-center gap-1.5 shrink-0 ${
             activeTab === 'emails'
-              ? 'border-blue-900 text-blue-900'
+              ? 'border-red-600 text-red-700 font-extrabold'
               : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
-          <Mail className="w-4 h-4 text-indigo-600" />
+          <Mail className="w-4 h-4 text-amber-600" />
           <span>Mail Outbox Logs ({emails.length})</span>
         </button>
       </div>
@@ -218,7 +261,7 @@ export default function AdminDashboard({ onOpenRegister }) {
                 placeholder="Search by name, ID, college or email..."
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
 
@@ -293,7 +336,7 @@ export default function AdminDashboard({ onOpenRegister }) {
                         className={`text-[10px] font-bold px-2 py-1 rounded-md transition ${
                           m.status === 'Active'
                             ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                            : 'bg-blue-50 text-blue-700 border border-blue-200'
+                            : 'bg-blue-50 text-red-700 border border-red-200'
                         }`}
                         title="Click to toggle status"
                       >
@@ -326,7 +369,7 @@ export default function AdminDashboard({ onOpenRegister }) {
                       <div className="flex items-center justify-end gap-1.5">
                         <button
                           onClick={() => downloadIdCardPdf(m)}
-                          className="p-1.5 rounded-lg bg-slate-100 hover:bg-blue-100 text-blue-900 transition"
+                          className="p-1.5 rounded-lg bg-slate-100 hover:bg-red-100 text-red-900 transition"
                           title="Download ID Card (PDF)"
                         >
                           <CreditCard className="w-4 h-4" />
@@ -382,7 +425,7 @@ export default function AdminDashboard({ onOpenRegister }) {
                 {donations.map((d) => (
                   <tr key={d.id} className="hover:bg-slate-50/70 transition">
                     <td className="py-3.5 px-4">
-                      <p className="font-mono font-bold text-blue-900">{d.receiptNumber}</p>
+                      <p className="font-mono font-bold text-red-800">{d.receiptNumber}</p>
                       <p className="text-[10px] text-slate-400">{d.date}</p>
                     </td>
 
@@ -448,7 +491,7 @@ export default function AdminDashboard({ onOpenRegister }) {
               emails.map((email) => (
                 <div key={email.id} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-blue-900">{email.subject}</span>
+                    <span className="font-bold text-red-800">{email.subject}</span>
                     <span className="text-[10px] text-slate-400 font-mono">{email.timestamp}</span>
                   </div>
                   <div className="flex items-center gap-2 text-[11px] text-slate-600">
@@ -465,6 +508,52 @@ export default function AdminDashboard({ onOpenRegister }) {
               ))
             )}
           </div>
+        </div>
+      )}
+
+      {/* TAB CONTENT: OFFICIAL ID CARDS */}
+      {activeTab === 'idcards' && (
+        <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm p-6">
+          <div className="mb-6 pb-4 border-b border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+            <div>
+              <h2 className="text-xl font-bold font-heading text-slate-900">
+                Official Pehchaan NGO Identity Badges
+              </h2>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Authorized membership card generator matching authentic Pehchaan Welfare Society standard.
+              </p>
+            </div>
+            <button
+              onClick={() => setActiveTab('members')}
+              className="text-xs font-semibold text-red-700 hover:text-red-800 transition"
+            >
+              ← Back to Members Table
+            </button>
+          </div>
+          <IdCardGenerator />
+        </div>
+      )}
+
+      {/* TAB CONTENT: OFFICIAL CERTIFICATES */}
+      {activeTab === 'certificates' && (
+        <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm p-6">
+          <div className="mb-6 pb-4 border-b border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+            <div>
+              <h2 className="text-xl font-bold font-heading text-slate-900">
+                Official Pehchaan NGO Service Certificates
+              </h2>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Dual signatory authorized certificates with QR verification for volunteers, interns, and academic partners.
+              </p>
+            </div>
+            <button
+              onClick={() => setActiveTab('members')}
+              className="text-xs font-semibold text-red-700 hover:text-red-800 transition"
+            >
+              ← Back to Members Table
+            </button>
+          </div>
+          <CertificateGenerator />
         </div>
       )}
 

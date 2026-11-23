@@ -1,3 +1,4 @@
+import { LOGO_PNG_BASE64 } from '../data/assetsBase64';
 import React from 'react';
 import { 
   Heart, 
@@ -22,15 +23,7 @@ export default function Footer({ setActiveTab, onOpenRegister, onOpenDonate }) {
           {/* Col 1 & 2: NGO Identity & Mission */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-600 flex items-center justify-center text-slate-950 font-black text-xl font-cinzel">
-                प
-              </div>
-              <div>
-                <span className="text-xl font-extrabold text-white font-heading">PEHCHAAN NGO</span>
-                <span className="text-[10px] font-bold block text-amber-400 uppercase tracking-widest">
-                  The Power of Re-Use
-                </span>
-              </div>
+              <img src={LOGO_PNG_BASE64} alt="Pehchaan Welfare Society NGO" className="h-12 w-auto object-contain bg-white/90 p-1.5 rounded-xl" />
             </div>
 
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
@@ -120,31 +113,34 @@ export default function Footer({ setActiveTab, onOpenRegister, onOpenDonate }) {
                   onClick={() => setActiveTab('verify')} 
                   className="hover:text-amber-400 transition"
                 >
-                  Verify Certificate
+                  Verify Credentials (Public)
                 </button>
               </li>
               <li>
                 <button 
                   onClick={() => setActiveTab('certificates')} 
-                  className="hover:text-amber-400 transition"
+                  className="hover:text-amber-400 transition flex items-center gap-1.5"
                 >
-                  Generate Digital Certificate
+                  <span>Generate Certificate</span>
+                  <span className="text-[10px] px-1.5 py-0.2 rounded bg-red-950 text-red-300 border border-red-800">Admin</span>
                 </button>
               </li>
               <li>
                 <button 
                   onClick={() => setActiveTab('idcards')} 
-                  className="hover:text-amber-400 transition"
+                  className="hover:text-amber-400 transition flex items-center gap-1.5"
                 >
-                  Generate ID Card Badge
+                  <span>Generate ID Badge</span>
+                  <span className="text-[10px] px-1.5 py-0.2 rounded bg-red-950 text-red-300 border border-red-800">Admin</span>
                 </button>
               </li>
               <li>
                 <button 
                   onClick={() => setActiveTab('admin')} 
-                  className="hover:text-amber-400 transition"
+                  className="hover:text-amber-400 transition flex items-center gap-1.5"
                 >
-                  Administrative Console
+                  <span>Admin Security Portal</span>
+                  <span className="text-[10px] px-1.5 py-0.2 rounded bg-amber-950 text-amber-300 border border-amber-800">Login</span>
                 </button>
               </li>
             </ul>

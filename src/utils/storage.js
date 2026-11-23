@@ -1,10 +1,10 @@
 import { INITIAL_MEMBERS, INITIAL_DONATIONS } from '../data/ngoData';
 
 const STORAGE_KEYS = {
-  MEMBERS: 'pehchaan_members_v1',
-  DONATIONS: 'pehchaan_donations_v1',
-  EMAILS: 'pehchaan_emails_v1',
-  SETTINGS: 'pehchaan_settings_v1'
+  MEMBERS: 'pehchaan_members_v2',
+  DONATIONS: 'pehchaan_donations_v2',
+  EMAILS: 'pehchaan_emails_v2',
+  SETTINGS: 'pehchaan_settings_v2'
 };
 
 // Initialize default storage data if absent
@@ -34,17 +34,13 @@ export function registerMember(memberData) {
   const members = getMembers();
   const year = new Date().getFullYear();
   const count = members.length + 1;
-  const prefixMap = {
-    Volunteer: 'VOL',
-    Intern: 'INT',
-    Member: 'MEM'
-  };
-  const rolePrefix = prefixMap[memberData.role] || 'MBR';
-  const newId = `PEH-${rolePrefix}-${year}-${String(count).padStart(3, '0')}`;
+  const newId = `M1122PWS${String(count).padStart(3, '0')}`;
   
   const newMember = {
     ...memberData,
     id: newId,
+    location: memberData.location || (memberData.center?.includes('Noida') ? 'Noida And Ghaziabad' : 'ALL India'),
+    validTill: '31 March 2028',
     joinedDate: new Date().toISOString().split('T')[0],
     status: 'Active',
     certificateIssued: false,

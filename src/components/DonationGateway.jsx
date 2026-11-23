@@ -136,7 +136,7 @@ export default function DonationGateway({ defaultCampaignId = null, onClose }) {
             <div className="flex justify-between items-center pb-3 border-b border-slate-200">
               <div>
                 <span className="text-xs text-slate-600 font-bold uppercase">Official 80G Receipt No.</span>
-                <p className="text-lg font-mono font-bold text-blue-900">
+                <p className="text-lg font-mono font-bold text-red-800">
                   {completedDonation.receiptNumber}
                 </p>
               </div>
@@ -166,7 +166,7 @@ export default function DonationGateway({ defaultCampaignId = null, onClose }) {
               </div>
             </div>
 
-            <div className="mt-2 p-3 bg-blue-50/80 rounded-xl text-[11px] text-blue-900 flex items-center gap-2">
+            <div className="mt-2 p-3 bg-blue-50/80 rounded-xl text-[11px] text-red-800 flex items-center gap-2">
               <Mail className="w-4 h-4 text-blue-600 shrink-0" />
               <span>An automated copy of this receipt has been emailed to <strong>{completedDonation.donorEmail}</strong>.</span>
             </div>
@@ -218,7 +218,7 @@ export default function DonationGateway({ defaultCampaignId = null, onClose }) {
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold uppercase px-2.5 py-0.5 rounded-md bg-blue-100 text-blue-800">
+                    <span className="text-xs font-bold uppercase px-2.5 py-0.5 rounded-md bg-blue-100 text-emerald-700">
                       {camp.category}
                     </span>
                     <span className="text-xs font-semibold text-emerald-700 flex items-center gap-1">
@@ -246,7 +246,7 @@ export default function DonationGateway({ defaultCampaignId = null, onClose }) {
                     </div>
                     <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
                       <div 
-                        className="bg-gradient-to-r from-blue-600 to-amber-500 h-2 rounded-full transition-all duration-500"
+                        className="bg-gradient-to-r from-red-600 to-amber-500 h-2 rounded-full transition-all duration-500"
                         style={{ width: `${progressPct}%` }}
                       ></div>
                     </div>
@@ -304,7 +304,7 @@ export default function DonationGateway({ defaultCampaignId = null, onClose }) {
                         onClick={() => handleSelectPreset(preset)}
                         className={`py-3 px-3 rounded-xl font-bold text-sm sm:text-base border transition ${
                           isSelected
-                            ? 'bg-blue-900 text-white border-blue-900 shadow-sm'
+                            ? 'bg-red-700 text-white border-red-700 shadow-sm'
                             : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
                         }`}
                       >
@@ -325,7 +325,7 @@ export default function DonationGateway({ defaultCampaignId = null, onClose }) {
                     placeholder="Enter custom amount (e.g. 15000)"
                     value={customAmount}
                     onChange={handleCustomChange}
-                    className="w-full pl-8 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full pl-8 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </div>
               </div>
@@ -353,7 +353,7 @@ export default function DonationGateway({ defaultCampaignId = null, onClose }) {
                       placeholder="e.g. Ramesh Chandra"
                       value={donorData.donorName}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
                     />
                   </div>
 
@@ -368,7 +368,7 @@ export default function DonationGateway({ defaultCampaignId = null, onClose }) {
                       placeholder="ramesh@example.com"
                       value={donorData.donorEmail}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
                     />
                   </div>
 
@@ -383,7 +383,7 @@ export default function DonationGateway({ defaultCampaignId = null, onClose }) {
                       placeholder="+91 9876543210"
                       value={donorData.donorPhone}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
                     />
                   </div>
 
@@ -399,7 +399,7 @@ export default function DonationGateway({ defaultCampaignId = null, onClose }) {
                       placeholder="e.g. ABCDE1234F"
                       value={donorData.panNumber}
                       onChange={(e) => setDonorData({ ...donorData, panNumber: e.target.value.toUpperCase() })}
-                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-red-500"
                     />
                   </div>
                 </div>
@@ -408,7 +408,7 @@ export default function DonationGateway({ defaultCampaignId = null, onClose }) {
               {/* Payment Gateway Toggle / Notice */}
               <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex items-center justify-between text-xs">
                 <div className="flex items-center gap-2 text-slate-700">
-                  <CreditCard className="w-4 h-4 text-blue-800" />
+                  <CreditCard className="w-4 h-4 text-emerald-700" />
                   <span>Gateway: <strong>Razorpay Secure Payments</strong> (UPI, Cards, NetBanking)</span>
                 </div>
                 <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[10px]">
@@ -420,11 +420,11 @@ export default function DonationGateway({ defaultCampaignId = null, onClose }) {
               <button
                 type="submit"
                 disabled={isProcessing}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-600 hover:to-amber-800 text-white font-extrabold text-base shadow-lg shadow-amber-500/25 active:scale-[0.99] transition flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-extrabold text-base shadow-lg shadow-emerald-600/25 active:scale-[0.99] transition flex items-center justify-center gap-2"
               >
                 <Heart className="w-5 h-5 fill-white" />
                 <span>
-                  Proceed to Pay ₹{finalAmount ? finalAmount.toLocaleString('en-IN') : '0'} & Get 80G Receipt
+                  Proceed to Donate ₹{finalAmount ? finalAmount.toLocaleString('en-IN') : '0'}
                 </span>
               </button>
 
@@ -497,7 +497,7 @@ export default function DonationGateway({ defaultCampaignId = null, onClose }) {
                   className="w-full p-3.5 rounded-xl border border-slate-200 hover:border-blue-600 hover:bg-blue-50/50 flex items-center justify-between transition text-left"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-lg bg-blue-100 text-blue-800 font-bold flex items-center justify-center text-xs">
+                    <span className="w-8 h-8 rounded-lg bg-blue-100 text-emerald-700 font-bold flex items-center justify-center text-xs">
                       CARD
                     </span>
                     <div>

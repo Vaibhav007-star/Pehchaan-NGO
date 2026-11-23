@@ -23,3 +23,22 @@ dist-ssr
 *.sln
 *.sw?
 
+# Vercel & Cache
+.vercel
+__pycache__/
+*.py[cod]
+*$py.class
+cleaned_certs/
+test_inpaint.py
+detect_star_box.py
+crop_isolated_star.py
+find_watermark.py
+fix_docx_contrast.py
+inject_clean_certs.py
+inspect_docx.py
+verify_cleaned.py
+clean_all_certs.py
+extracted_pdf_img_0.png
+public_logo.png
+email_render.html
+Service_Learning_Project_Report_Format_Pehchaan_NGO (1).docx

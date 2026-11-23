@@ -83,7 +83,7 @@ export default function VerificationPortal({ initialQuery = '' }) {
               placeholder="Enter Member ID (e.g. PEH-VOL-2024-001) or Certificate ID"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 uppercase font-mono"
+              className="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 uppercase font-mono"
             />
           </div>
           <button
@@ -100,13 +100,13 @@ export default function VerificationPortal({ initialQuery = '' }) {
           <span className="text-slate-500 font-medium">Try Sample Verified IDs:</span>
           <button
             onClick={() => handleQuickDemo('PEH-VOL-2024-001')}
-            className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-blue-50 text-blue-900 font-mono font-semibold border border-slate-200 transition"
+            className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-red-50 text-red-800 font-mono font-semibold border border-slate-200 transition"
           >
             PEH-VOL-2024-001 (Volunteer)
           </button>
           <button
             onClick={() => handleQuickDemo('PEH-INT-2024-114')}
-            className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-blue-50 text-blue-900 font-mono font-semibold border border-slate-200 transition"
+            className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-red-50 text-red-800 font-mono font-semibold border border-slate-200 transition"
           >
             PEH-INT-2024-114 (DU Intern)
           </button>
@@ -170,7 +170,7 @@ export default function VerificationPortal({ initialQuery = '' }) {
                         </span>
                       </div>
                       <p className="text-xs font-mono text-slate-500 mt-1">
-                        Registration ID: <strong className="text-blue-900">{result.id}</strong>
+                        Registration ID: <strong className="text-red-800">{result.id}</strong>
                       </p>
                     </div>
 
@@ -256,7 +256,7 @@ export default function VerificationPortal({ initialQuery = '' }) {
               <div className="pt-2">
                 <a
                   href={`mailto:${NGO_INFO.email}?subject=Verification%20Query%20${encodeURIComponent(searchQuery)}`}
-                  className="inline-flex items-center gap-1.5 text-xs text-blue-700 font-semibold hover:underline"
+                  className="inline-flex items-center gap-1.5 text-xs text-red-700 font-semibold hover:underline"
                 >
                   Contact Pehchaan NGO Verification Desk: {NGO_INFO.email}
                 </a>
